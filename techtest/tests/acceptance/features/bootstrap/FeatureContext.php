@@ -47,6 +47,16 @@ class FeatureContext extends BehatContext {
     }
 
     /**
+     * @Then /^I see a result of "NaN"$/
+     */
+    public function iSeeAResultOFNaN() {
+        $result = $this->calculator->readScreen();
+        if ($result != "NaN") {
+            throw new Exception("Wrong result, actual is [$result]");
+        }
+    }
+
+    /**
      * @Given /^I hit "equals"$/
      */
     public function iHitEquals() {
