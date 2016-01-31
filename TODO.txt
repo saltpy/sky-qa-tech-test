@@ -1,0 +1,1 @@
+-behat needs to be run from inside the acceptance folder to pickup the features - top level script perhaps?
