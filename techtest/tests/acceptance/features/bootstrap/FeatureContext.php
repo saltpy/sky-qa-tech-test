@@ -33,6 +33,13 @@ class FeatureContext extends BehatContext {
     }
 
     /**
+     * @when /^I hit "cuberoot"$/
+     */
+    public function iHitCubeRoot() {
+        $this->calculator->pressCubeRoot();
+    }
+
+    /**
      * @when /^I hit "hex"$/
      */
     public function iHitHex() {

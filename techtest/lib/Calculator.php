@@ -15,6 +15,7 @@ class Calculator implements iCalculator, iScientificCalculator {
     }
 
     public function cubeRoot($a) {
+        return pow($a, 1/3);
     }
 
     public function decToHex($a) {
@@ -38,6 +39,13 @@ class Calculator implements iCalculator, iScientificCalculator {
             return "NaN";
         }
         return ($a / $b);
+    }
+
+    public function pressCubeRoot() {
+        if(count($this->stack) > 1) {
+            $this->evaluateStack();
+        }
+        $this->op = "cuberoot";
     }
 
     public function pressConvertToHex() {
@@ -109,6 +117,9 @@ class Calculator implements iCalculator, iScientificCalculator {
                 break;
             case "cHex":
                 $result = $this->decToHex(array_shift($this->stack));
+                break;
+            case "cuberoot":
+                $result = $this->cubeRoot(array_shift($this->stack));
                 break;
         }
         $this->clearStack();
