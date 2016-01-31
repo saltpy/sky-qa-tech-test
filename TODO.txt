@@ -1,1 +1,2 @@
 -behat needs to be run from inside the acceptance folder to pickup the features - top level script perhaps?
+-ugly regex for covering floats and whole numbers - gone with two functions to improve readability but not happy that this is DRY enough - some code comments perhaps or similar?

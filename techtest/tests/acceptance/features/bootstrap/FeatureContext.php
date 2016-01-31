@@ -26,6 +26,13 @@ class FeatureContext extends BehatContext {
     }
 
     /**
+     * @Given /^I enter "(-?\d+.\d+)" into the calculator$/
+     */
+    public function iEnterAFloatingNumberIntoTheCalculator($argument1) {
+        $this->calculator->pressNumber($argument1);
+    }
+
+    /**
      * @When /^I hit "multiply"$/
      */
     public function iHitMultiply() {

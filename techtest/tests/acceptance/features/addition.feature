@@ -16,3 +16,12 @@ Scenario: Add two negative whole numbers
     And I enter "-2" into the calculator
     And I hit "equals"
     Then I see a result of "-4"
+
+
+@example
+Scenario: Add two floating numbers
+    Given I enter "1.5" into the calculator
+    And I hit "add"
+    And I enter "1.5" into the calculator
+    And I hit "equals"
+    Then I see a result of "3"
