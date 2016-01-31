@@ -18,6 +18,7 @@ class Calculator implements iCalculator, iScientificCalculator {
     }
 
     public function decToHex($a) {
+        return dechex($a);
     }
 
     public function add($a, $b) {
@@ -37,6 +38,13 @@ class Calculator implements iCalculator, iScientificCalculator {
             return "NaN";
         }
         return ($a / $b);
+    }
+
+    public function pressConvertToHex() {
+        if(count($this->stack) > 1) {
+            $this->evaluateStack();
+        }
+        $this->op = "cHex";
     }
 
     public function pressNumber($number) {
@@ -98,6 +106,10 @@ class Calculator implements iCalculator, iScientificCalculator {
                 break;
             case "!":
                 $result = $this->factorial(array_shift($this->stack));
+                break;
+            case "cHex":
+                $result = $this->decToHex(array_shift($this->stack));
+                break;
         }
         $this->clearStack();
         $this->stack[] = $result;

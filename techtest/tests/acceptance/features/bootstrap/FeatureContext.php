@@ -33,6 +33,13 @@ class FeatureContext extends BehatContext {
     }
 
     /**
+     * @when /^I hit "hex"$/
+     */
+    public function iHitHex() {
+        $this->calculator->pressConvertToHex();
+    }
+
+    /**
      * @When /^I hit "multiply"$/
      */
     public function iHitMultiply() {
@@ -44,16 +51,6 @@ class FeatureContext extends BehatContext {
      */
     public function iHitDivide() {
         $this->calculator->pressDivide();
-    }
-
-    /**
-     * @Then /^I see a result of "NaN"$/
-     */
-    public function iSeeAResultOFNaN() {
-        $result = $this->calculator->readScreen();
-        if ($result != "NaN") {
-            throw new Exception("Wrong result, actual is [$result]");
-        }
     }
 
     /**
@@ -84,24 +81,19 @@ class FeatureContext extends BehatContext {
         $this->calculator->pressSubtract();
     }
 
-    /**
-     * @Then /^I see a result of "(-?\d+)"$/
+    /** 
+     * @Then /^I see a result of "(.+)"$/
      */
     public function iSeeAResultOf($argument1) {
         $result = $this->calculator->readScreen();
-        if($result != $argument1) {
-            throw new Exception("Wrong result, actual is [$result]");
+        if (is_numeric($argument1)) {
+            if(abs($result - $argument1) > 0.000001) {
+                throw new Exception("Wrong result, actual is [$result]");
+            }
+        } else {
+            if($result != $argument1) {
+                throw new Exception("Wrong result, actual is [$result]");
+            }
         }
     }
-
-    /**
-     * @Then /^I see a result of "(-?\d+\.\d+)"$/
-     */
-    public function iSeeAFloatingResultOf($argument1) {
-        $result = $this->calculator->readScreen();
-        if(abs($result - $argument1) > 0.000001) {
-            throw new Exception("Wrong result, actual is [$result]");
-        }
-    }
-
 }
