@@ -26,7 +26,7 @@ class FeatureContext extends BehatContext {
     }
 
     /**
-     * @Given /^I enter "(-?\d+.\d+)" into the calculator$/
+     * @Given /^I enter "(-?\d+\.\d+)" into the calculator$/
      */
     public function iEnterAFloatingNumberIntoTheCalculator($argument1) {
         $this->calculator->pressNumber($argument1);
@@ -61,6 +61,13 @@ class FeatureContext extends BehatContext {
     }
 
     /**
+     * @when /^I hit "subtract"$/
+     */
+    public function iHitSubtract() {
+        $this->calculator->pressSubtract();
+    }
+
+    /**
      * @Then /^I see a result of "(-?\d+)"$/
      */
     public function iSeeAResultOf($argument1) {
@@ -69,4 +76,15 @@ class FeatureContext extends BehatContext {
             throw new Exception("Wrong result, actual is [$result]");
         }
     }
+
+    /**
+     * @Then /^I see a result of "(-?\d+\.\d+)"$/
+     */
+    public function iSeeAFloatingResultOf($argument1) {
+        $result = $this->calculator->readScreen();
+        if(abs($result - $argument1) > 0.000001) {
+            throw new Exception("Wrong result, actual is [$result]");
+        }
+    }
+
 }
