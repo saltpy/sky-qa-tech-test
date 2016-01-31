@@ -64,6 +64,13 @@ class FeatureContext extends BehatContext {
     }
 
     /**
+     * @when /^I hit "factorial"$/
+     */
+    public function iHitFactorial() {
+        $this->calculator->pressFactorial();
+    }
+
+    /**
      * @when /^I hit "add"$/
      */
     public function iHitAdd() {

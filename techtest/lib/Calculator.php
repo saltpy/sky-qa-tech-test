@@ -1,10 +1,24 @@
 <?php
 
-class Calculator implements iCalculator {
+class Calculator implements iCalculator, iScientificCalculator {
 
     protected $stack;
     protected $op;
     protected $result;
+
+    public function factorial($a) {
+        if ($a < 2) {
+            return 1;
+        } else {
+            return ($a * $this->factorial($a - 1));
+        }
+    }
+
+    public function cubeRoot($a) {
+    }
+
+    public function decToHex($a) {
+    }
 
     public function add($a, $b) {
         return ($a + $b);
@@ -27,6 +41,13 @@ class Calculator implements iCalculator {
 
     public function pressNumber($number) {
         $this->stack[] = $number;
+    }
+
+    public function pressFactorial() {
+        if(count($this->stack) > 1) {
+            $this->evaluateStack();
+        }
+        $this->op = "!";
     }
 
     public function pressAdd() {
@@ -75,6 +96,8 @@ class Calculator implements iCalculator {
             case "/":
                 $result = $this->divide(array_shift($this->stack), array_shift($this->stack));
                 break;
+            case "!":
+                $result = $this->factorial(array_shift($this->stack));
         }
         $this->clearStack();
         $this->stack[] = $result;
